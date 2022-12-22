@@ -33,7 +33,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addPerson(@RequestBody Person person){
+    public ResponseEntity<String> addPerson(@RequestBody Person person){
         try{
             validateServices.validate(person);
             dataBase.save(person);
@@ -46,7 +46,7 @@ public class PersonController {
     }
 
     @PutMapping
-    public ResponseEntity<?> putPerson(@RequestBody Person person){
+    public ResponseEntity<String> putPerson(@RequestBody Person person){
         try{
             validateServices.validate(person);
             dataBase.save(person);
@@ -58,8 +58,8 @@ public class PersonController {
     }
 
     @DeleteMapping("/{ipn}")
-    public ResponseEntity<?> deletePerson(@PathVariable long ipn){
-        Person person = null;
+    public ResponseEntity<String> deletePerson(@PathVariable long ipn){
+        Person person;
         try{
             log.info("delete {}", ipn);
             person = dataBase.findPersonByIpn(ipn);
