@@ -14,7 +14,7 @@ public class CheckIpnService {
                 && checkInControlNumber(person.getIpn()+"");
     }
 
-    private boolean checkInControlNumber(String ipnStr){
+    public boolean checkInControlNumber(String ipnStr){
         return ipnStr.length() == SIZE
                 && charToDigit(ipnStr.charAt(SIZE - 1)) == checkSum(ipnStr) % 11;
     }

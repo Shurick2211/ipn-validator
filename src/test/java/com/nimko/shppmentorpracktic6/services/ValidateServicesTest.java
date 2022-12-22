@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.stream.LongStream;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -37,5 +39,11 @@ class ValidateServicesTest {
         Exception e = assertThrows(MyValidatorException.class,()->{
             validateServices.validate(person);
         });
+    }
+
+    @Test
+    void valid(){
+       LongStream.range(2_000_000_000, 9_999_999_999L).mapToObj(String::valueOf).filter(checkIpnService::checkInControlNumber)
+               .limit(10).forEach(System.out::println);
     }
 }
