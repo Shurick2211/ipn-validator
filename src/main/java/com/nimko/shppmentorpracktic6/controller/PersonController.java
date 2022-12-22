@@ -40,9 +40,9 @@ public class PersonController {
             log.info("{}",person);
         } catch (Exception e){
             log.error("",e);
-            return new ResponseEntity<>(e.toString(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e + " " + person,null, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Add: " + person,null, HttpStatus.CREATED);
     }
 
     @PutMapping
@@ -52,20 +52,22 @@ public class PersonController {
             dataBase.save(person);
             log.info("{}",person);
         } catch (Exception e){
-            return new ResponseEntity<>(e,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e + " " + person, null, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.UPGRADE_REQUIRED);
+        return new ResponseEntity<>("Put: " + person, HttpStatus.UPGRADE_REQUIRED);
     }
 
     @DeleteMapping("/{ipn}")
     public ResponseEntity<?> deletePerson(@PathVariable long ipn){
+        Person person = null;
         try{
             log.info("delete {}", ipn);
-            dataBase.delete(dataBase.findPersonByIpn(ipn));
+            person = dataBase.findPersonByIpn(ipn);
+            dataBase.delete(person);
         } catch (Exception e){
-            return new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.toString(),null,HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        return new ResponseEntity<>("Delete: " + person, null,HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 
 }

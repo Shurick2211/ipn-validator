@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
