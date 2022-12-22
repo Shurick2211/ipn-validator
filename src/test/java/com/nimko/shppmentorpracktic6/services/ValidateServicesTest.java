@@ -1,6 +1,6 @@
 package com.nimko.shppmentorpracktic6.services;
 
-import com.nimko.shppmentorpracktic6.Excepion.MyValidatorException;
+import com.nimko.shppmentorpracktic6.excepion.MyValidatorException;
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.model.Sex;
 import org.junit.jupiter.api.Test;

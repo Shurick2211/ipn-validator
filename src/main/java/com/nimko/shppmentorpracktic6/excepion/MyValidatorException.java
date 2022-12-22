@@ -1,4 +1,4 @@
-package com.nimko.shppmentorpracktic6.Excepion;
+package com.nimko.shppmentorpracktic6.excepion;
 
 public class MyValidatorException extends Exception{
     private final String MESSAGE = "Input person not valid!";
