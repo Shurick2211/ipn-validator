@@ -1,7 +1,7 @@
 package com.nimko.shppmentorpracktic6.excepion;
 
 public class MyValidatorException extends Exception{
-    private final String MESSAGE = "Input person not valid!";
+    private final String MESSAGE = "Input person is not valid!";
 
     @Override
     public String getMessage() {
