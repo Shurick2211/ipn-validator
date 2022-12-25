@@ -3,8 +3,11 @@ package com.nimko.shppmentorpracktic6.controller;
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.repo.DataBase;
 import com.nimko.shppmentorpracktic6.services.ValidateServices;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,8 @@ public class PersonController {
 
     @Autowired
     ValidateServices validateServices;
+
+
 
     @GetMapping("/{ipn}")
     public Person getPerson(@PathVariable long ipn){
