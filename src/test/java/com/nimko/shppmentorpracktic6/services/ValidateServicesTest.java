@@ -3,6 +3,7 @@ package com.nimko.shppmentorpracktic6.services;
 import com.nimko.shppmentorpracktic6.excepion.MyValidatorException;
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.model.Sex;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import java.util.stream.LongStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@Disabled
 @SpringBootTest
 class ValidateServicesTest {
     @Autowired
