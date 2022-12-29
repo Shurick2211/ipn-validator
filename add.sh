@@ -14,5 +14,7 @@ curl http://localhost:5000/persons/2000000015
 echo -e
 curl -X DELETE http://localhost:5000/persons/2000000050
 echo -e
+curl -X DELETE http://localhost:5000/persons/2000000050
+echo -e
 curl http://localhost:5000/persons
 echo -e
