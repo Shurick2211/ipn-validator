@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,18 +30,14 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addPerson(@Valid @RequestBody Person person, BindingResult result){
-        log.debug(result.toString());
-        if(result.hasErrors()) return ResponseEntity.badRequest().body(result.toString());
+    public ResponseEntity<String> addPerson(@Valid @RequestBody Person person){
         personRepo.save(person);
         log.info("{}",person);
         return ResponseEntity.status(HttpStatus.CREATED).body("Add: " + person);
     }
 
     @PutMapping
-    public ResponseEntity<String> putPerson(@Valid @RequestBody Person person, BindingResult result){
-        log.debug(result.toString());
-        if(result.hasErrors()) return ResponseEntity.badRequest().body(result.toString());
+    public ResponseEntity<String> putPerson(@Valid @RequestBody Person person){
         personRepo.save(person);
         log.info("{}",person);
         return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body("Put: " + person);
