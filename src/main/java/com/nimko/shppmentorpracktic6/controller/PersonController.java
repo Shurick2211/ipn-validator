@@ -2,13 +2,15 @@ package com.nimko.shppmentorpracktic6.controller;
 
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.repo.DataBase;
-import com.nimko.shppmentorpracktic6.services.ValidateServices;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -19,8 +21,7 @@ public class PersonController {
     @Autowired
     DataBase dataBase;
 
-    @Autowired
-    ValidateServices validateServices;
+
 
 
 
@@ -35,9 +36,9 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addPerson(@RequestBody Person person){
+    public ResponseEntity<String> addPerson(@Valid @RequestBody Person person, BindingResult result){
+        log.warn(result.toString());
         try{
-            validateServices.validate(person);
             dataBase.save(person);
             log.info("{}",person);
         } catch (Exception e){
@@ -48,9 +49,9 @@ public class PersonController {
     }
 
     @PutMapping
-    public ResponseEntity<String> putPerson(@RequestBody Person person){
+    public ResponseEntity<String> putPerson(@Valid @RequestBody Person person, BindingResult result){
+        log.warn(result.toString());
         try{
-            validateServices.validate(person);
             dataBase.save(person);
             log.info("{}",person);
         } catch (Exception e){
