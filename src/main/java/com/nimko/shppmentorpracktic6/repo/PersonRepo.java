@@ -9,8 +9,5 @@ import java.util.List;
 @Repository
 public interface PersonRepo extends JpaRepository<Person,Long> {
     Person findPersonByIpn(String ipn);
-
     List<Person> findAll();
-
-
 }

@@ -33,25 +33,18 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<String> addPerson(@Valid @RequestBody Person person, BindingResult result){
         log.debug(result.toString());
-        if(!result.hasErrors()){
-            personRepo.save(person);
-            log.info("{}",person);
-        } else {
-            log.error("{}",result);
-            return ResponseEntity.badRequest().body(result.toString());
-        }
+        if(result.hasErrors()) return ResponseEntity.badRequest().body(result.toString());
+        personRepo.save(person);
+        log.info("{}",person);
         return ResponseEntity.status(HttpStatus.CREATED).body("Add: " + person);
     }
 
     @PutMapping
     public ResponseEntity<String> putPerson(@Valid @RequestBody Person person, BindingResult result){
         log.debug(result.toString());
-        if(!result.hasErrors()){
-            personRepo.save(person);
-            log.info("{}",person);
-        } else{
-            return ResponseEntity.badRequest().body(result.toString());
-        }
+        if(result.hasErrors()) return ResponseEntity.badRequest().body(result.toString());
+        personRepo.save(person);
+        log.info("{}",person);
         return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body("Put: " + person);
     }
 
