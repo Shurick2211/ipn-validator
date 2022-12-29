@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.LongStream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidateServicesTest {
     CheckIpnService checkIpnService = new CheckIpnService();
@@ -17,6 +18,11 @@ class ValidateServicesTest {
     void setUp(){
         person = new Person(1, "2991108392", "Olexandr",
                 "Nimko", Sex.MALE);
+    }
+
+    @Test
+    void  checkValidPerson(){
+        assertTrue(checkIpnService.checkInPerson(person));
     }
 
     @Test

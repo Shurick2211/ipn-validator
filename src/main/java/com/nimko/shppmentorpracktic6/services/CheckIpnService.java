@@ -13,7 +13,7 @@ public class CheckIpnService implements ConstraintValidator<ValidateIpn,Person> 
     private static final int SIZE = 10;
 
     public boolean checkInPerson(Person person) {
-        return checkSex(person.getIpn(), person.getSex())
+        return  checkSex(person.getIpn(), person.getSex())
                 && checkInControlNumber(person.getIpn());
     }
 
@@ -22,9 +22,9 @@ public class CheckIpnService implements ConstraintValidator<ValidateIpn,Person> 
                 && charToDigit(ipn.charAt(SIZE - 1)) == checkSum(ipn) % 11;
     }
 
-    private boolean checkSex(String ipnStr, Sex sex) {
-        return charToDigit(ipnStr.charAt(SIZE - 2)) % 2 == 1
-                && sex == Sex.MALE;
+    private boolean checkSex(String ipn, Sex sex) {
+        return sex == Sex.MALE ? charToDigit(ipn.charAt(SIZE - 2)) % 2 == 1:
+                charToDigit(ipn.charAt(SIZE - 2)) % 2 == 0;
     }
 
     private int checkSum(String ipn) {
