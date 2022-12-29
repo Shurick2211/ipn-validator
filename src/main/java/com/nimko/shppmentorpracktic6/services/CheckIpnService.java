@@ -10,16 +10,16 @@ import javax.validation.ConstraintValidatorContext;
 @Service
 public class CheckIpnService implements ConstraintValidator<ValidateIpn,Person> {
 
-    private final int SIZE = 10;
+    private static final int SIZE = 10;
 
     public boolean checkInPerson(Person person) {
         return checkSex(person.getIpn(), person.getSex())
                 && checkInControlNumber(person.getIpn());
     }
 
-    public boolean checkInControlNumber(String ipnStr) {
-        return ipnStr.length() == SIZE
-                && charToDigit(ipnStr.charAt(SIZE - 1)) == checkSum(ipnStr) % 11;
+    public boolean checkInControlNumber(String ipn) {
+        return ipn.length() == SIZE
+                && charToDigit(ipn.charAt(SIZE - 1)) == checkSum(ipn) % 11;
     }
 
     private boolean checkSex(String ipnStr, Sex sex) {
@@ -27,24 +27,20 @@ public class CheckIpnService implements ConstraintValidator<ValidateIpn,Person> 
                 && sex == Sex.MALE;
     }
 
-    private int checkSum(String ipnStr) {
-        int[] ipn = new int[SIZE];
-        for (int i = 0; i < SIZE; i++) ipn[i] = charToDigit(ipnStr.toCharArray()[i]);
-        return ipn[0] * (-1) + ipn[1] * 5
-                + ipn[2] * 7 + ipn[3] * 9
-                + ipn[4] * 4 + ipn[5] * 6
-                + ipn[6] * 10 + ipn[7] * 5 + ipn[8] * 7;
+    private int checkSum(String ipn) {
+        int result = 0;
+        final int[] formula = {-1,5,7,9,4,6,10,5,7};
+        for (int i = 0; i < formula.length; i++)
+            result += charToDigit(ipn.charAt(i)) * formula[i];
+        return result;
     }
 
     private int charToDigit(char c) {
         return c - '0';
     }
 
-
     @Override
     public boolean isValid(Person value, ConstraintValidatorContext context) {
         return checkInPerson(value);
     }
-
-
 }
