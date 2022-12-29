@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DataBase extends JpaRepository<Person,Long> {
-    Person findPersonByIpn(long ipn);
+public interface PersonRepo extends JpaRepository<Person,Long> {
+    Person findPersonByIpn(String ipn);
 
     List<Person> findAll();
 

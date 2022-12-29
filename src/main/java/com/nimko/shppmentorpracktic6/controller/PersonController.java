@@ -1,9 +1,8 @@
 package com.nimko.shppmentorpracktic6.controller;
 
 import com.nimko.shppmentorpracktic6.model.Person;
-import com.nimko.shppmentorpracktic6.repo.DataBase;
+import com.nimko.shppmentorpracktic6.repo.PersonRepo;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,27 +18,27 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    DataBase dataBase;
+    PersonRepo personRepo;
 
 
 
 
 
     @GetMapping("/{ipn}")
-    public Person getPerson(@PathVariable long ipn){
-        return  dataBase.findPersonByIpn(ipn);
+    public Person getPerson(@PathVariable String ipn){
+        return  personRepo.findPersonByIpn(ipn);
     }
 
     @GetMapping
     public List<Person> getPersons(){
-        return  dataBase.findAll();
+        return  personRepo.findAll();
     }
 
     @PostMapping
     public ResponseEntity<String> addPerson(@Valid @RequestBody Person person, BindingResult result){
         log.debug(result.toString());
         if(!result.hasErrors()){
-            dataBase.save(person);
+            personRepo.save(person);
             log.info("{}",person);
         } else {
             log.error("{}",result);
@@ -52,7 +51,7 @@ public class PersonController {
     public ResponseEntity<String> putPerson(@Valid @RequestBody Person person, BindingResult result){
         log.debug(result.toString());
         if(!result.hasErrors()){
-            dataBase.save(person);
+            personRepo.save(person);
             log.info("{}",person);
         } else{
             return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body(result.toString());
@@ -61,12 +60,12 @@ public class PersonController {
     }
 
     @DeleteMapping("/{ipn}")
-    public ResponseEntity<String> deletePerson(@PathVariable long ipn){
+    public ResponseEntity<String> deletePerson(@PathVariable String ipn){
         Person person;
         try{
             log.info("delete {}", ipn);
-            person = dataBase.findPersonByIpn(ipn);
-            dataBase.delete(person);
+            person = personRepo.findPersonByIpn(ipn);
+            personRepo.delete(person);
         } catch (Exception e){
             return new ResponseEntity<>(e.toString(),null,HttpStatus.NOT_FOUND);
         }
