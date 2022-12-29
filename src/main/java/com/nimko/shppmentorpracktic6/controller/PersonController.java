@@ -37,27 +37,27 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<String> addPerson(@Valid @RequestBody Person person, BindingResult result){
-        log.warn(result.toString());
-        try{
+        log.debug(result.toString());
+        if(!result.hasErrors()){
             dataBase.save(person);
             log.info("{}",person);
-        } catch (Exception e){
-            log.error("",e);
-            return new ResponseEntity<>(e + " " + person,null, HttpStatus.BAD_REQUEST);
+        } else {
+            log.error("{}",result);
+            return ResponseEntity.badRequest().body(result.toString());
         }
-        return new ResponseEntity<>("Add: " + person,null, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Add: " + person);
     }
 
     @PutMapping
     public ResponseEntity<String> putPerson(@Valid @RequestBody Person person, BindingResult result){
-        log.warn(result.toString());
-        try{
+        log.debug(result.toString());
+        if(!result.hasErrors()){
             dataBase.save(person);
             log.info("{}",person);
-        } catch (Exception e){
-            return new ResponseEntity<>(e + " " + person, null, HttpStatus.BAD_REQUEST);
+        } else{
+            return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body(result.toString());
         }
-        return new ResponseEntity<>("Put: " + person, HttpStatus.UPGRADE_REQUIRED);
+        return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body("Put: " + person);
     }
 
     @DeleteMapping("/{ipn}")
