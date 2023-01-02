@@ -2,13 +2,12 @@ package com.nimko.shppmentorpracktic6.services;
 
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.model.Sex;
-import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-@Service
-public class CheckIpnService implements ConstraintValidator<ValidateIpn,Person> {
+
+public class IpnValidateImpl implements ConstraintValidator<IpnValidator,Person> {
 
     private static final int SIZE = 10;
 

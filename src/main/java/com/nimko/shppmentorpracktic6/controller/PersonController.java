@@ -15,9 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/persons", produces = "application/json")
 public class PersonController {
-
+    private final PersonRepo personRepo;
     @Autowired
-    private PersonRepo personRepo;
+    public PersonController(PersonRepo personRepo) {
+        this.personRepo = personRepo;
+    }
 
     @GetMapping("/{ipn}")
     public Person getPerson(@PathVariable String ipn){

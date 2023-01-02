@@ -1,6 +1,6 @@
 package com.nimko.shppmentorpracktic6.model;
 
-import com.nimko.shppmentorpracktic6.services.ValidateIpn;
+import com.nimko.shppmentorpracktic6.services.IpnValidator;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @ToString
-@ValidateIpn
+@IpnValidator
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

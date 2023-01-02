@@ -13,17 +13,16 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class MyAdviceController {
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<String> processValidationError(MethodArgumentNotValidException ex) {
-
         return ResponseEntity
                 .badRequest()
                 .body(ex.getBindingResult().getAllErrors().stream()
                                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                                 .collect(Collectors.toList()).toString());
     }
+
 }
 

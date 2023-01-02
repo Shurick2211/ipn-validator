@@ -7,10 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = CheckIpnService.class)
+@Constraint(validatedBy = IpnValidateImpl.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidateIpn {
+public @interface IpnValidator {
     String message() default "IPN is not valid!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
