@@ -17,14 +17,14 @@ public class MyAspect {
 
     @Around("Pointcuts.allControllerMethods()")
     public Object logging( ProceedingJoinPoint joinPoint) throws Throwable {
-        Object o = null;
        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
        String methodName = signature.getName();
        log.info("{} was call", methodName);
        if (methodName.startsWith("add") || methodName.startsWith("put")) {
-           log.info("{} try to add on DB", Arrays.stream(joinPoint.getArgs()).sequential().filter(a -> a instanceof Person).findFirst().get());
+           log.info("{} try to add on DB", Arrays.stream(joinPoint.getArgs()).sequential()
+                   .filter(a -> a instanceof Person).findFirst().orElse(""));
        }
-       o = joinPoint.proceed();
+       Object o = joinPoint.proceed();
        log.info("Success for {}", methodName);
        return o;
     }

@@ -1,4 +1,4 @@
-package com.nimko.shppmentorpracktic6.controller;
+package com.nimko.shppmentorpracktic6.controllers;
 
 import com.nimko.shppmentorpracktic6.model.Person;
 import com.nimko.shppmentorpracktic6.repo.PersonRepo;

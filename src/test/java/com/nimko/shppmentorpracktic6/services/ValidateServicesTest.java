@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidateServicesTest {
-    IpnValidateImpl ipnValidateImpl = new IpnValidateImpl();
+    IpnValidatorImpl ipnValidatorImpl = new IpnValidatorImpl();
     Person person;
 
     @BeforeEach
@@ -22,25 +22,25 @@ class ValidateServicesTest {
 
     @Test
     void  checkValidPerson(){
-        assertTrue(ipnValidateImpl.checkInPerson(person));
+        assertTrue(ipnValidatorImpl.checkInPerson(person));
     }
 
     @Test
     void checkInNoValidPersonSex() {
         person.setSex(Sex.FEMALE);
-        assertFalse(ipnValidateImpl.checkInPerson(person));
+        assertFalse(ipnValidatorImpl.checkInPerson(person));
     }
 
     @Test
     void checkInNoValidPersonIpn() {
         person.setIpn("2991108391");
-        assertFalse(ipnValidateImpl.checkInPerson(person));
+        assertFalse(ipnValidatorImpl.checkInPerson(person));
     }
 
     @Test
     void valid(){
        LongStream.range(2_000_000_000, 9_999_999_999L).mapToObj(String::valueOf)
-               .filter(ipnValidateImpl::checkInControlNumber)
+               .filter(ipnValidatorImpl::checkInControlNumber)
                .limit(10).forEach(System.out::println);
     }
 }

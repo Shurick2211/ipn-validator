@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 
-public class IpnValidateImpl implements ConstraintValidator<IpnValidator,Person> {
+public class IpnValidatorImpl implements ConstraintValidator<IpnValidator,Person> {
 
     private static final int SIZE = 10;
 

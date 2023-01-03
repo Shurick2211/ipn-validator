@@ -1,4 +1,4 @@
-package com.nimko.shppmentorpracktic6.controller;
+package com.nimko.shppmentorpracktic6.controllers;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
