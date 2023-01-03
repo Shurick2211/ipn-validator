@@ -24,7 +24,9 @@ public class PersonController {
 
     @GetMapping("/{ipn}")
     public Person getPerson(@PathVariable String ipn){
-        return  personRepo.findPersonByIpn(ipn);
+        Person person = personRepo.findPersonByIpn(ipn);
+        if(person == null) throw new NotFoundException("IPN not found");
+        return  person;
     }
 
     @GetMapping

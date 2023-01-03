@@ -16,20 +16,17 @@ import java.util.Arrays;
 public class MyAspect {
 
     @Around("Pointcuts.allControllerMethods()")
-    public void logging( ProceedingJoinPoint joinPoint) {
+    public Object logging( ProceedingJoinPoint joinPoint) throws Throwable {
+        Object o = null;
        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
        String methodName = signature.getName();
        log.info("{} was call", methodName);
        if (methodName.startsWith("add") || methodName.startsWith("put")) {
            log.info("{} try to add on DB", Arrays.stream(joinPoint.getArgs()).sequential().filter(a -> a instanceof Person).findFirst().get());
        }
-       try {
-           joinPoint.proceed();
-       } catch (Throwable e) {
-            log.error("Error in method {}", methodName, e);
-            return;
-       }
+       o = joinPoint.proceed();
        log.info("Success for {}", methodName);
+       return o;
     }
 
 }
